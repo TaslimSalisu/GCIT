@@ -1,0 +1,7 @@
+1. select noOfCopies from tbl_book_copies tbc inner join tbl_book tb on tbc.bookId = tb.bookId inner join tbl_library_branch tlb on tlb.branchId = tbc.branchId where tb.title = ‘The lost Tribe’ and tlb.branchName = ‘Sharpstown’;
+2. select branchName, noOfCopies from tbl_book_copies tbc inner join tbl_book tb on tbc.bookId = tb.bookId inner join tbl_library_branch tlb on tlb.branchId = tbc.branchId where tb.title = ‘The lost Tribe’;
+3. select distinct name from tbl_borrower tb where tb.cardNo not in (select cardNo from tbl_book_loans);
+4. select title, name, address from tbl_borrower tb join tbl_book_loans tbl on tb.cardNo = tbl.cardNo join tbl_book tbk on tbl.bookID = tbk.bookId where branchID in (select branchId from tbl_library_branch where branchName = ‘Sharpstown’) and DueDate = getDate();
+5. select branchName, count(tbl_book_loans.branchID) from tbl_library_branch tlb join tbl_book_loans tbl where tlb.branchId = tbl.branchId groupby branchName;
+6. select name, address, count(tbl_book_loans.cardNo) from tbl_borrower tb join tbl_book_loans tbl on tb.cardNo = tbl.cardNo groupby name having count(tbl_book_loans.cardNo) > 5;
+7. select title, noOfCopies from tbl_book tb join tbl_book tbk on tb.bookId = tbk.bookId join tbl_book_author tba on tbk.bookId = tba.bookId where authorId in (select authorId from tbl_author where authorName = ‘Stephen King’) and branchId in (select branchId from tbl_library_branch where branchName = ‘Central’);
